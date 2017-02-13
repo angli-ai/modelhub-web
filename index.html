@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ModelHub Sys Webpage</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="dist/css/bootstrap.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="dist/css/bootstrap-theme.css">
+	<link href="offcanvas.css" rel="stylesheet">
+</head>
+<body>
+	<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">ModelHub</a>
+			</div>
+			<form class="navbar-form navbar-left" role="search">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Search ModelHub">
+				</div>
+				<button type="submit" class="btn btn-success">Search</button>
+			</form>
+			<div class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="#about">About</a></li>
+					<li><a href="#contact">Contact</a></li>
+				</ul>
+			</div><!-- /.nav-collapse -->
+		</div><!-- /.container -->
+	</div><!-- /.navbar -->
+
+<div class="container">
+	      <div class="row row-offcanvas row-offcanvas-right">
+        <div class="col-xs-12 col-sm-9">
+          <p class="pull-right visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+          </p>
+          <div class="jumbotron">
+            <h1>ModelHub</h1>
+            <p>Click a project and view details of its models.</p>
+          </div>
+          <div class="row">
+            <div class="col-6 col-sm-6 col-lg-4">
+              <h4>VGG_CNN_S</h4>
+              <p>13.1% top-5 error on ILSVRC-2012-val</p>
+              <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
+            </div><!--/span-->
+            <div class="col-6 col-sm-6 col-lg-4">
+              <h4>VGG_CNN_M</h4>
+              <p>13.7% top-5 error on ILSVRC-2012-val </p>
+              <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
+            </div><!--/span-->
+            <div class="col-6 col-sm-6 col-lg-4">
+              <h4>VGG_CNN_M_2048</h4>
+              <p>13.5% top-5 error on ILSVRC-2012-val</p>
+              <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
+            </div><!--/span-->
+            <div class="col-6 col-sm-6 col-lg-4">
+              <h4>VGG_CNN_M_1024</h4>
+              <p>13.7% top-5 error on ILSVRC-2012-val</p>
+              <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
+            </div><!--/span-->
+            <div class="col-6 col-sm-6 col-lg-4">
+              <h4>VGG_CNN_M_128</h4>
+              <p>15.6% top-5 error on ILSVRC-2012-val </p>
+              <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
+            </div><!--/span-->
+            <div class="col-6 col-sm-6 col-lg-4">
+              <h4>VGG_CNN_F</h4>
+              <p>16.7% top-5 error on ILSVRC-2012-val </p>
+              <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
+            </div><!--/span-->
+          </div><!--/row-->
+        </div><!--/span-->
+
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+          <div class="well sidebar-nav">
+            <ul class="nav">
+              <li><strong>User Name:</strong> John Doe</li>
+              <li><strong>Affiliation:</strong> University of Maryland</li>
+              <li><strong>Email:</strong> johndoe@umd.edu</li>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <hr>
+      <footer>
+      <p>&copy; University of Maryland 2017</p>
+      </footer>
+      </div> <!--/.container-->
+
+    <script src="dist/js/bootstrap.min.js"></script>
+</body>
+</html>
