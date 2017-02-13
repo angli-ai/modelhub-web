@@ -35,6 +35,12 @@
 			color: #aaa;
 		}
 
+.col-6.col-sm-6.col-lg-4 {
+	padding-left: 20px;
+	padding-bottom: 20px;
+}
+
+
 
 	</style>
 </head>
@@ -103,19 +109,33 @@
 	<script>
 
 		var models = [
-		{name: 'LeNet', desc: 'LeNet'},
-		{name: 'AlexNet', desc: 'AlexNet'},
-		{name: 'GoogLeNet', desc: 'GoogLeNet, a.k.a. Inception'},
-		{name: 'VGG_CNN', desc: 'VGG network variants tested on ILSVRC-2012-val (13.7% - 16.7%)'},
-		{name: 'VGG', desc: 'VGG network variants with different depths tested on both ILSVRC-2012-val and ILSVRC-2012-test. 7.5% top-5 error on ILSVRC-2012-val, 7.3% - 7.4% top-5 error on ILSVRC-2012-test'}
+		{name: 'LeNet', desc: 'Sparse, convolutional layers and max-pooling are at the heart of the LeNet family of models. The lower-layers are composed to alternating convolution and max-pooling layers. The upper-layers however are fully-connected and correspond to a traditional MLP (hidden layer + logistic regression). The input to the first fully-connected layer is the set of all features maps at the layer below.'},
+		{name: 'AlexNet', desc: 'AlexNet is a large, deep convolutional neural network first successfully used to classify the 1.3 million high-resolution images in the LSVRC-2010 ImageNet training set into the 1000 different classes. AlexNet has 60 million parameters and 500,000 neurons, and consists of five convolutional layers, some of which are followed by max-pooling layers, and two globally connected layers with a final 1000-way softmax.'},
+		{name: 'GoogLeNet', desc: 'GoogLeNet is a deep convolutional neural network composed of the Inception modules. The Inception module is basically the parallel combination of 1×1, 3×3, and 5×5 convolutional filters. But the great insight of the inception module was the use of 1×1 convolutional blocks (NiN) to reduce the number of features before the expensive parallel blocks. This is commonly referred as “bottleneck”.'},
+		{name: 'VGG_CNN', desc: 'VGG network variants (VGG_CNN_S, VGG_CNN_M, VGG_CNN_M_2048, VGG_CNN_M_1024, VGG_CNN_M_128, VGG_CNN_F) tested on ILSVRC-2012-val (13.7% - 16.7%). The models are trained on the ILSVRC-2012 dataset. The details can be found in Chatfield et al. Return of the Devil in the Details: Delving Deep into Convolutional Nets. BMVC 2014.'},
+		{name: 'VGG', desc: 'VGG network variants with different depths used by the VGG team in ILSVRC-2014. The models are the improved versions of the models used by the VGG team in the ILSVRC-2014 competition. The details can be found in Simonyan and Zisserman, Very Deep Convolutional Networks for Large-Scale Image Recognition, ICLR 2015. In the paper, the models are denoted as configurations D and E, trained with scale jittering.'}
 		];
 		for (var i = 0; i < models.length; ++ i) {
 			var model = models[i];
-			var newhtml = //'<div class="col-6 col-sm-6 col-lg-4">'
-			'<div class="card"><div class=rounded>'+'<h4><a href=modeldetail.html?name=' + model.name + '>'
-			+ model.name + '</a></h4><p class="gray">' + model.desc + '</p></div></div>';
+			var newhtml = '<div class="col-6 col-sm-6 col-lg-4">' +
+			'<a href="modeldetail.html?name=' + model.name + '" style="text-decoration: none"><div class="thumbnail"><div class="caption">'+'<h4 class="text-primary">'+ model.name + '</h4><p class="text-muted">' + model.desc + '</p></div></div></a></div>';
 			$('#modeldiv').append(newhtml);
 		}
+
+		function equalHeight(group) {    
+    var tallest = 0;    
+    group.each(function() {       
+        var thisHeight = $(this).height();       
+        if(thisHeight > tallest) {          
+            tallest = thisHeight;       
+        }    
+    });    
+    group.each(function() { $(this).height(tallest); });
+} 
+
+$(document).ready(function() {   
+    equalHeight($(".thumbnail")); 
+});
 	</script>
 </body>
 </html>

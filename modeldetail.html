@@ -35,6 +35,9 @@
 			color: #aaa;
 		}
 
+		.btn.dnld {
+			margin-top: -8px;
+		}
 
 	</style>
 </head>
@@ -47,7 +50,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="index.html"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp; Back</a>
+				<a class="navbar-brand" href="index.html">Back</a>
 			</div>
 			<form class="navbar-form navbar-left" role="search">
 				<div class="form-group">
@@ -68,14 +71,17 @@
 	<div class="container">
 		<div class="row row-offcanvas row-offcanvas-right">
 			<div class="col-xs-12 col-sm-9">
-				<p class="pull-right visible-xs">
-					<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
-				</p>
-				<div class="jumbotron">
-					<h2><a href='index.html'>ModelHub</a></h2>
-					<p id='modelname'>Deep learning lifecycle management | Project navigation</p>
+				<div class="panel panel-default">
+				<div class="panel-heading"><h4>
+				<span class="text-primary" id="projname"></span>
+				<button class="btn pull-right btn-success dnld">Download</button></h4>
 				</div>
-				<div class="row" id="modeldiv"></div><!--/row-->
+				<div class="panel-body" id="projdesc"></div>
+				<table class="table">
+					<thead><tr><th class="col-md-3">Model name</th><th>Model description</th></tr></thead>
+					<tbody id="modeldiv"></tbody>
+				</table>
+				</div>
 			</div><!--/span-->
 
 			<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
@@ -109,33 +115,40 @@
 		var modelname = querystring[0];
 		$('#modelname').html('Project name: ' + modelname);
 
-		var models
+		var models, projdesc
 		if (modelname === 'LeNet') {
-			models = [ {name: 'LeNet', desc: 'LeNet'} ];
+			projdesc = 'Sparse, convolutional layers and max-pooling are at the heart of the LeNet family of models. The lower-layers are composed to alternating convolution and max-pooling layers. The upper-layers however are fully-connected and correspond to a traditional MLP (hidden layer + logistic regression). The input to the first fully-connected layer is the set of all features maps at the layer below.';
+			models = [ {name: 'LeNet', desc: 'The final model of LeNet for digit classification.'} ];
 		} else if (modelname === 'AlexNet') {
-			models = [ {name: 'AlexNet', desc: 'AlexNet'}];
+			projdesc = 'AlexNet is a large, deep convolutional neural network first successfully used to classify the 1.3 million high-resolution images in the LSVRC-2010 ImageNet training set into the 1000 different classes. AlexNet has 60 million parameters and 500,000 neurons, and consists of five convolutional layers, some of which are followed by max-pooling layers, and two globally connected layers with a final 1000-way softmax.';
+			models = [ {name: 'AlexNet', desc: 'The final model of AlexNet for image classification in ImageNet.'}];
 		} else if (modelname === 'GoogLeNet') {
-			models = [ {name: 'GoogLeNet', desc: 'GoogLeNet'}];
+			projdesc = 'GoogLeNet is a deep convolutional neural network composed of the Inception modules. The Inception module is basically the parallel combination of 1×1, 3×3, and 5×5 convolutional filters. But the great insight of the inception module was the use of 1×1 convolutional blocks (NiN) to reduce the number of features before the expensive parallel blocks. This is commonly referred as “bottleneck”.';
+			models = [ {name: 'GoogLeNet', desc: 'The final model of GoogLeNet for image classification in ImageNet dataset.'}];
 		} else if (modelname === 'VGG_CNN') {
+			projdesc = 'VGG network variants (VGG_CNN_S, VGG_CNN_M, VGG_CNN_M_2048, VGG_CNN_M_1024, VGG_CNN_M_128, VGG_CNN_F) tested on ILSVRC-2012-val (13.7% - 16.7%). The models are trained on the ILSVRC-2012 dataset. The details can be found in Chatfield et al. Return of the Devil in the Details: Delving Deep into Convolutional Nets. BMVC 2014.';
 			models = [
-			{name: 'VGG_CNN_S', desc: 'VGG_CNN_S'},
-			{name: 'VGG_CNN_M', desc: 'VGG_CNN_M'},
-			{name: 'VGG_CNN_M_2048', desc: 'VGG_CNN_M_2048'},
-			{name: 'VGG_CNN_M_1024', desc: 'VGG_CNN_M_1024'},
-			{name: 'VGG_CNN_M_128', desc: 'VGG_CNN_M_128'},
-			{name: 'VGG_CNN_F', desc: 'VGG_CNN_F'}
+			{name: 'VGG_CNN_S', desc: 'The network consists of 5 convolutional layers. The first conv layer uses 96x7x7 filters with x3 pooling. The 3rd and 4th conv layer use 512x3x3 filters. 13.1% top-5 error on ILSVRC-2012-val'},
+			{name: 'VGG_CNN_M', desc: 'The network consists of 5 convolutional layers. The first conv layer uses 96x7x7 filters with x2 pooling. The 3rd and 4th conv layer use 512x3x3 filters. 13.7% top-5 error on ILSVRC-2012-val'},
+			{name: 'VGG_CNN_M_2048', desc: 'The same network as VGG_CNN_M but with 2048 dimentional fc8 output features. 13.5% top-5 error on ILSVRC-2012-val'},
+			{name: 'VGG_CNN_M_1024', desc: 'The same network as VGG_CNN_M but with 1024 dimentional fc8 output features. 13.7% top-5 error on ILSVRC-2012-val'},
+			{name: 'VGG_CNN_M_128', desc: 'The same network as VGG_CNN_M but with 128 dimentional fc8 output features. 15.6% top-5 error on ILSVRC-2012-val'},
+			{name: 'VGG_CNN_F', desc: 'The network consists of 5 convolutional layers. The first conv layer uses 64x11x11 filters with x2 pooling. The 3rd and 4th conv layer use 256x3x3 filters. 16.7% top-5 error on ILSVRC-2012-val'}
 			];
 		} else if (modelname === 'VGG') {
+			projdesc = 'VGG network variants with different depths used by the VGG team in ILSVRC-2014. The models are the improved versions of the models used by the VGG team in the ILSVRC-2014 competition. The details can be found in Simonyan and Zisserman, Very Deep Convolutional Networks for Large-Scale Image Recognition, ICLR 2015. In the paper, the models are denoted as configurations D and E, trained with scale jittering.';
 			models = [
-			{name: 'VGG-16', desc: 'VGG network variant with depth 16'},
-			{name: 'VGG-19', desc: 'VGG network variant with depth 19'}
+			{name: 'VGG-16', desc: 'VGG network variant with depth 16. 7.5% top-5 error on ILSVRC-2012-val, 7.4% top-5 error on ILSVRC-2012-test.'},
+			{name: 'VGG-19', desc: 'VGG network variant with depth 19. 7.5% top-5 error on ILSVRC-2012-val, 7.3% top-5 error on ILSVRC-2012-test'}
 			]
 		}
+
+
+		$('#projname').html(modelname);
+		$('#projdesc').html(projdesc);
 		for (var i = 0; i < models.length; ++ i) {
 			var model = models[i];
-			var newhtml = //'<div class="col-6 col-sm-6 col-lg-4">'
-			'<div class="card"><div class=rounded>'+'<h4><a href=modeldetail.html?name=' + model.name + '>'
-			+ model.name + '</a></h4><p class="gray">' + model.desc + '</p></div></div>';
+			var newhtml = '<tr><td>' + model.name + '<td>' + model.desc;
 			$('#modeldiv').append(newhtml);
 		}
 	</script>
