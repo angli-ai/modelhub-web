@@ -50,7 +50,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="index.html">Back</a>
+				<a class="navbar-brand" href="index.html">ModelHub</a>
 			</div>
 			<form class="navbar-form navbar-left" role="search">
 				<div class="form-group">
@@ -144,6 +144,53 @@
 			models = [
 			{name: 'VGG-16', desc: 'VGG network variant with depth 16. 7.5% top-5 error on ILSVRC-2012-val, 7.4% top-5 error on ILSVRC-2012-test.'},
 			{name: 'VGG-19', desc: 'VGG network variant with depth 19. 7.5% top-5 error on ILSVRC-2012-val, 7.3% top-5 error on ILSVRC-2012-test'}
+			]
+		} 
+		// added 
+		else if (modelname === 'janus') {
+			projdesc = 'Face recognition using CNN. Cifar10 dataset.';
+			models = [
+				{name: 'model-0', desc: 'baseline'},
+				{name: 'model-1', desc: 'insert Convolution(model-1-conv) after relu3, from model-0'},
+				{name: 'model-2', desc: 'modify global base_lr from 0.001 to 0.01, from model-1'},
+				{name: 'model-3', desc: 'insert Pooling(model-3-pool) after conv3, from model-0'},
+				{name: 'model-4', desc: 'insert Pooling(model-4-pool) after cifar, from model-0'},
+				{name: 'model-5', desc: 'insert Convolution(model-5-conv) after pool3, from model-0'},
+				{name: 'model-6', desc: 'delete ReLU(relu1), from model-1'},
+				{name: 'model-7', desc: 'insert Convolution(model-7-conv) after pool1, from model-5'},
+				{name: 'model-8', desc: 'delete Pooling(pool2), from model-7'},
+				{name: 'model-9', desc: 'delete LRN(norm1), from model-7'},
+				{name: 'model-10', desc: 'delete Pooling(pool3), from model-9'},
+				{name: 'model-11', desc: 'insert Pooling(model-11-pool) after cifar, from model-5'},
+				{name: 'model-12', desc: 'delete Convolution(model-5-conv), from model-11'},
+				{name: 'model-13', desc: 'delete Convolution(model-7-conv), from model-8'},
+				{name: 'model-14', desc: 'modify global base_lr from 0.001 to 0.1, from model-0'},
+				{name: 'model-15', desc: 'insert Pooling(model-15-pool) after model-5-relu, from model-13'},
+				{name: 'model-16', desc: 'insert Pooling(model-16-pool) after cifar, from model-0'},
+				{name: 'model-17', desc: 'delete LRN(norm1), from model-5'},
+				{name: 'model-18', desc: 'insert Pooling(model-18-pool) after relu1, from model-0'},
+				{name: 'model-19', desc: 'insert Pooling(model-19-pool) after relu1, from model-13'},
+				{name: 'model-20', desc: 'insert Pooling(model-20-pool) after relu2, from model-0'},
+				{name: 'model-21', desc: 'insert Pooling(model-21-pool) after cifar, from model-0'},
+				{name: 'model-22', desc: 'insert Convolution(model-22-conv) after cifar, from model-5'},
+				{name: 'model-23', desc: 'insert Pooling(model-23-pool) after relu3, from model-1'},
+				{name: 'model-24', desc: 'insert Convolution(model-24-conv) after conv1, from model-17'},
+				{name: 'model-25', desc: 'modify Pooling(pool3) parameter pool from 1 to 2, from model-19'},
+				{name: 'model-26', desc: 'modify global base_lr from 0.001 to 0.0001, from model-25'},
+				{name: 'model-27', desc: 'insert Pooling(model-27-pool) after pool3, from model-24'},
+				{name: 'model-28', desc: 'modify Pooling(pool3) parameter stride from 2 to 1, from model-0'},
+				{name: 'model-29', desc: 'insert Pooling(model-29-pool) after relu2, from model-24'},
+				{name: 'model-30', desc: 'modify global base_lr from 0.001 to 0.1, from model-22'},
+				{name: 'model-31', desc: 'modify global base_lr from 0.001 to 0.0001, from model-24'},
+				{name: 'model-32', desc: 'modify Convolution(conv1) parameter kernel_size from 5 to 5, from model-5'},
+				{name: 'model-33', desc: 'delete ReLU(model-5-relu), from model-24'},
+				{name: 'model-34', desc: 'insert InnerProduct(model-34-ip) after ip1, from model-24'},
+				{name: 'model-35', desc: 'delete Pooling(pool1), from model-24'},
+				{name: 'model-36', desc: 'delete Convolution(model-24-conv), from model-33'},
+				{name: 'model-37', desc: 'modify Convolution(conv3) parameter num_output from 64 to 128, from model-15'},
+				{name: 'model-38', desc: 'insert Convolution(model-38-conv) after model-15-pool, from model-37'},
+				{name: 'model-39', desc: 'modify Pooling(pool1) parameter stride from 2 to 1, from model-28'},
+				{name: 'model-40', desc: 'insert Convolution(model-40-conv) after model-24-relu, from model-33'}
 			]
 		}
 
