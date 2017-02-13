@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ModelHub Sys Webpage</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="dist/css/bootstrap.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="dist/css/bootstrap-theme.css">
+	<link href="offcanvas.css" rel="stylesheet">
+	<style>
+		.card {
+			padding-left: 15px;
+			padding-right: 15px;
+			width: 100%;
+			height: 100px;
+		}
+		.rounded {
+			border-radius: 10px;
+			border-width: 2px;
+			border-style: solid;
+			border-color: #ddd;
+			margin-top: 10px;
+			padding: 10px;
+			width: 100%;
+			height: 100%;
+			//background: #fff; // without a background or border applied you won't be able to see if its rounded
+		}
+
+		.jumbotron {
+			padding: 1em;
+		}
+
+		.gray {
+			color: #aaa;
+		}
+
+
+	</style>
+</head>
+<body>
+	<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.html"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp; Back</a>
+			</div>
+			<form class="navbar-form navbar-left" role="search">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Search ModelHub">
+				</div>
+				<button type="submit" class="btn btn-success">Search</button>
+			</form>
+			<div class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="index.html">Home</a></li>
+					<li><a href="#about">About</a></li>
+					<li><a href="#contact">Contact</a></li>
+				</ul>
+			</div><!-- /.nav-collapse -->
+		</div><!-- /.container -->
+	</div><!-- /.navbar -->
+
+	<div class="container">
+		<div class="row row-offcanvas row-offcanvas-right">
+			<div class="col-xs-12 col-sm-9">
+				<p class="pull-right visible-xs">
+					<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+				</p>
+				<div class="jumbotron">
+					<h2><a href='index.html'>ModelHub</a></h2>
+					<p id='modelname'>Deep learning lifecycle management | Project navigation</p>
+				</div>
+				<div class="row" id="modeldiv"></div><!--/row-->
+			</div><!--/span-->
+
+			<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+				<div class="well sidebar-nav">
+					<ul class="nav">
+						<li><strong>User Name:</strong> John Doe</li>
+						<li><strong>Affiliation:</strong> University of Maryland</li>
+						<li><strong>Email:</strong> johndoe@umd.edu</li>
+					</ul>
+				</div><!--/.well -->
+			</div><!--/span-->
+		</div><!--/row-->
+
+		<hr>
+		<footer>
+			<p>&copy; University of Maryland 2017</p>
+		</footer>
+	</div> <!--/.container-->
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="dist/js/bootstrap.min.js"></script>
+	<script>
+
+		function querystring(key) {
+			var re=new RegExp('(?:\\?|&)'+key+'=(.*?)(?=&|$)','gi');
+			var r=[], m;
+			while ((m=re.exec(document.location.search)) != null) r.push(m[1]);
+			return r;
+		}
+		var querystring = querystring('name');
+		var modelname = querystring[0];
+		$('#modelname').html('Project name: ' + modelname);
+
+		var models
+		if (modelname === 'LeNet') {
+			models = [ {name: 'LeNet', desc: 'LeNet'} ];
+		} else if (modelname === 'AlexNet') {
+			models = [ {name: 'AlexNet', desc: 'AlexNet'}];
+		} else if (modelname === 'GoogLeNet') {
+			models = [ {name: 'GoogLeNet', desc: 'GoogLeNet'}];
+		} else if (modelname === 'VGG_CNN') {
+			models = [
+			{name: 'VGG_CNN_S', desc: 'VGG_CNN_S'},
+			{name: 'VGG_CNN_M', desc: 'VGG_CNN_M'},
+			{name: 'VGG_CNN_M_2048', desc: 'VGG_CNN_M_2048'},
+			{name: 'VGG_CNN_M_1024', desc: 'VGG_CNN_M_1024'},
+			{name: 'VGG_CNN_M_128', desc: 'VGG_CNN_M_128'},
+			{name: 'VGG_CNN_F', desc: 'VGG_CNN_F'}
+			];
+		} else if (modelname === 'VGG') {
+			models = [
+			{name: 'VGG-16', desc: 'VGG network variant with depth 16'},
+			{name: 'VGG-19', desc: 'VGG network variant with depth 19'}
+			]
+		}
+		for (var i = 0; i < models.length; ++ i) {
+			var model = models[i];
+			var newhtml = //'<div class="col-6 col-sm-6 col-lg-4">'
+			'<div class="card"><div class=rounded>'+'<h4><a href=modeldetail.html?name=' + model.name + '>'
+			+ model.name + '</a></h4><p class="gray">' + model.desc + '</p></div></div>';
+			$('#modeldiv').append(newhtml);
+		}
+	</script>
+</body>
+</html>

@@ -8,6 +8,35 @@
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="dist/css/bootstrap-theme.css">
 	<link href="offcanvas.css" rel="stylesheet">
+	<style>
+		.card {
+			padding: 5px;
+			width: 33.3%;
+			height: 200px;
+			float:left;
+		}
+		.rounded {
+			border-radius: 10px;
+			border-width: 2px;
+			border-style: solid;
+			border-color: #ddd;
+			margin: 10px;
+			padding: 5px;
+			width: 90%;
+			height: 190px;
+			float: left;
+		}
+
+		.jumbotron {
+			padding: 1em;
+		}
+
+		.gray {
+			color: #aaa;
+		}
+
+
+	</style>
 </head>
 <body>
 	<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
@@ -36,67 +65,54 @@
 		</div><!-- /.container -->
 	</div><!-- /.navbar -->
 
-<div class="container">
-	      <div class="row row-offcanvas row-offcanvas-right">
-        <div class="col-xs-12 col-sm-9">
-          <p class="pull-right visible-xs">
-            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
-          </p>
-          <div class="jumbotron">
-            <h1>ModelHub</h1>
-            <p>Click a project and view details of its models.</p>
-          </div>
-          <div class="row">
-            <div class="col-6 col-sm-6 col-lg-4">
-              <h4>VGG_CNN_S</h4>
-              <p>13.1% top-5 error on ILSVRC-2012-val</p>
-              <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
-            </div><!--/span-->
-            <div class="col-6 col-sm-6 col-lg-4">
-              <h4>VGG_CNN_M</h4>
-              <p>13.7% top-5 error on ILSVRC-2012-val </p>
-              <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
-            </div><!--/span-->
-            <div class="col-6 col-sm-6 col-lg-4">
-              <h4>VGG_CNN_M_2048</h4>
-              <p>13.5% top-5 error on ILSVRC-2012-val</p>
-              <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
-            </div><!--/span-->
-            <div class="col-6 col-sm-6 col-lg-4">
-              <h4>VGG_CNN_M_1024</h4>
-              <p>13.7% top-5 error on ILSVRC-2012-val</p>
-              <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
-            </div><!--/span-->
-            <div class="col-6 col-sm-6 col-lg-4">
-              <h4>VGG_CNN_M_128</h4>
-              <p>15.6% top-5 error on ILSVRC-2012-val </p>
-              <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
-            </div><!--/span-->
-            <div class="col-6 col-sm-6 col-lg-4">
-              <h4>VGG_CNN_F</h4>
-              <p>16.7% top-5 error on ILSVRC-2012-val </p>
-              <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
-            </div><!--/span-->
-          </div><!--/row-->
-        </div><!--/span-->
+	<div class="container">
+		<div class="row row-offcanvas row-offcanvas-right">
+			<div class="col-xs-12 col-sm-9">
+				<p class="pull-right visible-xs">
+					<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+				</p>
+				<div class="jumbotron">
+					<h2><a href='#'>ModelHub</a></h2>
+					<p>Deep learning lifecycle management | Project navigation</p>
+				</div>
+				<div class="row" id="modeldiv"></div><!--/row-->
+			</div><!--/span-->
 
-        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-          <div class="well sidebar-nav">
-            <ul class="nav">
-              <li><strong>User Name:</strong> John Doe</li>
-              <li><strong>Affiliation:</strong> University of Maryland</li>
-              <li><strong>Email:</strong> johndoe@umd.edu</li>
-            </ul>
-          </div><!--/.well -->
-        </div><!--/span-->
-      </div><!--/row-->
+			<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+				<div class="well sidebar-nav">
+					<ul class="nav">
+						<li><strong>User Name:</strong> John Doe</li>
+						<li><strong>Affiliation:</strong> University of Maryland</li>
+						<li><strong>Email:</strong> johndoe@umd.edu</li>
+					</ul>
+				</div><!--/.well -->
+			</div><!--/span-->
+		</div><!--/row-->
 
-      <hr>
-      <footer>
-      <p>&copy; University of Maryland 2017</p>
-      </footer>
-      </div> <!--/.container-->
+		<hr>
+		<footer>
+			<p>&copy; University of Maryland 2017</p>
+		</footer>
+	</div> <!--/.container-->
 
-    <script src="dist/js/bootstrap.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="dist/js/bootstrap.min.js"></script>
+	<script>
+
+		var models = [
+		{name: 'LeNet', desc: 'LeNet'},
+		{name: 'AlexNet', desc: 'AlexNet'},
+		{name: 'GoogLeNet', desc: 'GoogLeNet, a.k.a. Inception'},
+		{name: 'VGG_CNN', desc: 'VGG network variants tested on ILSVRC-2012-val (13.7% - 16.7%)'},
+		{name: 'VGG', desc: 'VGG network variants with different depths tested on both ILSVRC-2012-val and ILSVRC-2012-test. 7.5% top-5 error on ILSVRC-2012-val, 7.3% - 7.4% top-5 error on ILSVRC-2012-test'}
+		];
+		for (var i = 0; i < models.length; ++ i) {
+			var model = models[i];
+			var newhtml = //'<div class="col-6 col-sm-6 col-lg-4">'
+			'<div class="card"><div class=rounded>'+'<h4><a href=modeldetail.html?name=' + model.name + '>'
+			+ model.name + '</a></h4><p class="gray">' + model.desc + '</p></div></div>';
+			$('#modeldiv').append(newhtml);
+		}
+	</script>
 </body>
 </html>
